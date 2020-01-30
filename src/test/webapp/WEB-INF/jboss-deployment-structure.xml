@@ -1,0 +1,15 @@
+<jboss-deployment-structure xmlns="urn:jboss:deployment-structure:1.2"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.jboss.org/schema/jbossas
+    http://www.jboss.org/schema/jbossas/jboss-deployment-structure-1_2.xsd">
+	<deployment>
+		<dependencies>
+			<module name="org.picketlink.idm.schema" meta-inf="import" annotations="true"/>
+			<module name="com.fasterxml.jackson.jaxrs.jackson-jaxrs-json-provider"/>
+		</dependencies>
+		<exclusions>
+			<module name="org.jboss.resteasy.resteasy-jackson-provider" />
+			<module name="org.jboss.resteasy.resteasy-jettison-provider"/>
+		</exclusions>
+	</deployment>
+</jboss-deployment-structure>
