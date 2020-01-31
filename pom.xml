@@ -67,24 +67,7 @@
 			<artifactId>jboss-jaxrs-api_2.1_spec</artifactId>
 			<version>1.0.2.Final</version>
 		</dependency>
-		
-		
-		<!--  <dependency>
-			<groupId>org.infinispan</groupId>
-			<artifactId>infinispan-clustered-counter</artifactId>
-			<version>9.4.14.Final</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.infinispan</groupId>
-			<artifactId>infinispan-directory-provider</artifactId>
-			<version>9.4.14.Final</version>
-		</dependency>-->
 	</dependencies>
-	
-	
-	
-
 	<build>
 		<plugins>
 			<plugin>
