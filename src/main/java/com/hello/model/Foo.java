@@ -8,11 +8,9 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-import org.infinispan.commons.persistence.Store;
 
 
 @Entity
-@Store
 public class Foo {
 	
 
