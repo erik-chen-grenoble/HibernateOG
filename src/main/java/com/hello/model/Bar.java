@@ -5,11 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
-import org.infinispan.commons.persistence.Store;
-
 
 @Entity(name = "Bar")
-@Store
 public class Bar {
 	
 	@Id

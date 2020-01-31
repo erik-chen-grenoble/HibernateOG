@@ -5,62 +5,47 @@
  ~ License: GNU Lesser General Public License (LGPL), version 2.1 or later
  ~ See the lgpl.txt file in the root directory or <http://www.gnu.org/licenses/lgpl-2.1.html>.
   -->
-
-<!--
-    This is a testing configuration, running in clustered mode.
-    Using an alternative directory to persist the counters: counters-alt.
--->
 <infinispan
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="urn:infinispan:config:9.2 http://www.infinispan.org/schemas/infinispan-config-9.2.xsd
-        urn:infinispan:config:counters:9.2 http://www.infinispan.org/schemas/infinispan-counters-config-9.2.xsd"
+    xsi:schemaLocation="urn:infinispan:config:9.4 http://www.infinispan.org/schemas/infinispan-config-9.4.xsd"
     xmlns="urn:infinispan:config:9.4">
 
     <jgroups>
-        <!-- This is a JGroups stack useful for in-VM tests only -->
-        <stack-file name="loopback-stack" path="ems-jgroups-udp.xml" />
+         <stack-file name="ems-jgroups" path="ems-jgroups-udp.xml"/>
     </jgroups>
 
-    <cache-container name="ems-model-index" default-cache="DEFAULT" statistics="false" shutdown-hook="DONT_REGISTER">
-        <transport stack="loopback-stack" />
-        <jmx duplicate-domains="true" />
-
-        <global-state>
-            <persistent-location path="/root/infinispan"/>
-        </global-state>
-
-        <replicated-cache-configuration name="OGM-template">
-            <locking striping="false" acquire-timeout="10000" concurrency-level="50" isolation="REPEATABLE_READ"/>
-            <transaction mode="NON_XA" />
-            <eviction strategy="NONE" />
-             <persistence>
-				<file-store fetch-state="true" preload="true" path="/root/infinispan"/>
-			</persistence>
-            <expiration max-idle="-1" />
-            <indexing index="NONE" />
-            <state-transfer timeout="480000" await-initial-transfer="true" />
-        </replicated-cache-configuration>
+    <cache-container name="ems-model" statistics="false" shutdown-hook="DONT_REGISTER">
+    	 	
+        <transport stack="ems-jgroups"  cluster="EMS"/>
+        <jmx duplicate-domains="true"/>
 
         <!-- *************************************** -->
         <!--     Default cache used as template      -->
         <!-- *************************************** -->
-        <distributed-cache name="DEFAULT" configuration="OGM-template" />
+        <replicated-cache-configuration name ="replicated_conf" mode="SYNC" statistics="false" statistics-available="false">
+            <locking isolation="REPEATABLE_READ"/>
+            <transaction mode="BATCH" locking="PESSIMISTIC"/>
+			<expiration interval="-1"/>
+            <persistence>
+				<file-store fetch-state="true" preload="true" path="/root/infinispan"/>
+			</persistence>
+            <state-transfer timeout="480000"/>
+        </replicated-cache-configuration>
 
         <!-- *************************************** -->
         <!--     Cache to store the OGM entities     -->
         <!-- *************************************** -->
-        <replicated-cache name="ENTITIES" configuration="OGM-template" />
+        <replicated-cache name="ENTITIES" configuration="replicated_conf" />
 
         <!-- *********************************************** -->
         <!--   Cache to store the relations across entities  -->
         <!-- *********************************************** -->
-        <replicated-cache name="ASSOCIATIONS" configuration="OGM-template" />
+        <replicated-cache name="ASSOCIATIONS" configuration="replicated_conf"/>
 
         <!-- ***************************** -->
         <!--   Cache to store identifiers  -->
         <!-- ***************************** -->
-        <replicated-cache name="IDENTIFIERS" configuration="OGM-template" />
+        <replicated-cache name="IDENTIFIERS" configuration="replicated_conf"/>
 
     </cache-container>
-
 </infinispan>
