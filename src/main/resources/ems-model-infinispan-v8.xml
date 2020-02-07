@@ -5,7 +5,7 @@
     xmlns="urn:infinispan:config:8.2">
 
     <jgroups>
-         <stack-file name="ems-jgroups" path="/etc/opt/OC/hpoc-ems/infinispan-ems-model-jgroups.xml"/>
+         <stack-file name="ems-jgroups" path="ems-jgroups-udp.xml"/>
     </jgroups>
 
     <cache-container name="ems-model" default-cache="DEFAULT" statistics="false" shutdown-hook="DONT_REGISTER">

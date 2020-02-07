@@ -1,4 +1,4 @@
-package com.hello.model;
+package com.hello;
 
 import java.util.List;
 

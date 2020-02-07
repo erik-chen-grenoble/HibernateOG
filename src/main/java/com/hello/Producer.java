@@ -20,10 +20,7 @@ import javax.persistence.EntityManagerFactory;
 import org.hibernate.ogm.jpa.HibernateOgmPersistence;
 
 import com.hello.model.Bar;
-import com.hello.model.DynamicPersistentModel;
 import com.hello.model.Foo;
-import com.hello.model.HibernateOGMPersistenceUnitInfo;
-import com.hello.model.PersistentModel;
 
 /**
  * CDI producer that works around EntityManager initialization.</br>
@@ -54,7 +51,7 @@ public class Producer {
 	@Produces
 	@RequestScoped
 	public EntityManager createEntityManager() {
-		System.out.println("4 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+		System.out.println("################ -> createEntityManager");
 		if (factory == null) {
 			factory = createEntityManagerFactory();
 		}
@@ -65,7 +62,7 @@ public class Producer {
 	@ApplicationScoped
 	public EntityManagerFactory createEntityManagerFactory() {
 
-		System.out.println("3 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+		System.out.println("################ -> createEntityManagerFactory");
 
 		EntityManagerFactory entityManagerFactory = ogmPersistence
 				.createContainerEntityManagerFactory(getPersistenceUnitInfo(), getOgmConfig());
@@ -76,7 +73,7 @@ public class Producer {
 	@Produces
 	@Singleton
 	public PersistentModel createPersistentModel() {
-		System.out.println("2 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+		System.out.println("################ -> createPersistentModel");
 
 		if (persistentModel == null) {
 			persistentModel = new DynamicPersistentModel();
@@ -104,7 +101,7 @@ public class Producer {
 	}
 
 	private Properties loadPersistencePropertiesFile() {
-		System.out.println("1 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+		System.out.println("################ -> loadPersistencePropertiesFile");
 
 		Properties properties = new Properties();
 

@@ -40,6 +40,8 @@
 		<dependency>
 			<groupId>org.hibernate.ogm</groupId>
 			<artifactId>hibernate-ogm-infinispan-embedded</artifactId>
+			<!-- When using 5.1.0.Final version -->
+			<!-- <artifactId>hibernate-ogm-infinispan-embedded</artifactId> -->
 		</dependency>
 		
 

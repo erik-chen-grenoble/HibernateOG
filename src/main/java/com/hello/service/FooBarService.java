@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.hello;
+package com.hello.service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,9 +38,9 @@ public class FooBarService {
 	protected EntityManager entityManager;
 
 	@Transactional
-	String persisitFoo(String name) {
+	public String persisitFoo(String name) {
 
-		System.out.println("##################### PERSIST ---> " + name);
+		System.out.println("##################### PERSIST FOO (with one BAR)---> " + name);
 
 		Foo foo = new Foo();
 		String id_foo = "Foo_" + name + "_id";
@@ -56,29 +56,28 @@ public class FooBarService {
 		bars.add(bar);
 		bar.setFoo(foo);
 		
-		entityManager.persist(bar);
 		
 		foo.setBars(bars);
 		
-		//foo.addBar(name);
 
 		entityManager.persist(foo);
 		entityManager.flush();
 
+		
 		Foo result = entityManager.find(Foo.class, id_foo);
 		return result.toString();
 	}
 	
 	@Transactional
-	void persisitbar(Bar bar) {
+	public void persisitbar(Bar bar) {
 		entityManager.persist(bar);
 		entityManager.flush();
 	}
 
 	@Transactional
-	String getBar(String name) {
+	public String getBar(String name) {
 
-		System.out.println("##################### GET ---> " + name);
+		System.out.println("##################### GET BAR---> " + name);
 
 		String id_foo = "Foo_" + name + "_id";
 		String id_bar = "Bar_" + id_foo;
@@ -92,9 +91,9 @@ public class FooBarService {
 	}
 
 	@Transactional
-	String getFoo(String name) {
+	public String getFoo(String name) {
 
-		System.out.println("##################### GET ---> " + name);
+		System.out.println("##################### GET FOO---> " + name);
 
 		String id_foo = "Foo_" + name + "_id";
 

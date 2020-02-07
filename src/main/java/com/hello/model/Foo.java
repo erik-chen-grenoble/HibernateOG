@@ -12,9 +12,7 @@ import javax.persistence.OneToMany;
 
 @Entity
 public class Foo {
-	
-
-	
+		
 	@Id
     private String id;
     
@@ -23,8 +21,6 @@ public class Foo {
     @OneToMany(cascade = CascadeType.ALL , orphanRemoval = true, mappedBy = "foo", targetEntity = Bar.class)
     private List<Bar> bars = new ArrayList<>();
 
-    
-    
 	public List<Bar> getBars() {
 		return bars;
 	}
@@ -49,13 +45,13 @@ public class Foo {
 		this.name = name;
 	}
 
-	
-	
 	@Override
 	public String toString() {
 		
-		return name +" --- "+ bars.size();
-		
+		if(bars.size() == 0) {
+			return "Foo : " + name +" --- NO Bar" ;
+		}
+		return "Foo : " + name +" --- Bars["+bars.get(0).getName()+"]";
 	}
 
 

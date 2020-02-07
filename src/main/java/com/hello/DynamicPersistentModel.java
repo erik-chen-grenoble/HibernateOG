@@ -1,11 +1,9 @@
-package com.hello.model;
+package com.hello;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.enterprise.inject.Alternative;
-
-
 
 @Alternative
 public class DynamicPersistentModel implements PersistentModel {
