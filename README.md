@@ -40,4 +40,12 @@ cp ./target/helloWolrd-1.0.0-SNAPSHOT.war on /opt/wildfly-17.0.1.Final/standalon
 curl -i -X POST http://localhost:8080/helloWolrd-1.0.0-SNAPSHOT/foo/create/Myfoo
 #get Foo
 curl -i -X POST http://localhost:8080/helloWolrd-1.0.0-SNAPSHOT/foo/get/Myfoo
+############ OK   the  Bar association is present ############
 ```
+
+**If I restart my application then** 
+```
+curl -i -X POST http://localhost:8080/helloWolrd-1.0.0-SNAPSHOT/foo/get/Myfoo
+############ KO  I loose the Bar association  ############
+```
+
